@@ -1,0 +1,68 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html" locale="#{lokalizacija.vazecaLokalizacija}">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>#{i18n.noviPortfelj_naslov}</title>
+            </f:facet>
+        </h:head>
+
+        <h:body>
+
+            <p:layout fullPage="true">
+
+                <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
+                    <h1>#{i18n.noviPortfelj_naslov}</h1>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="south" size="100" closable="true" collapsible="true">
+                    <h5>#{i18n.noviPortfelj_podnozje}</h5>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="west" size="225">
+                    <h:form>
+                        <p:menu>
+                            <p:submenu label="#{i18n.noviPortfelj_resursi}">
+                                <p:menuitem value="#{i18n.noviPortfelj_odabirPortfelja}" outcome="odabirPortfelja" />
+                            </p:submenu>
+                            <p:submenu label="#{i18n.noviPortfelj_postavke}">
+                                <p:menuitem value="#{i18n.index_naslov}" outcome="odabirJezika" />
+                                <p:menuitem value="#{i18n.noviPortfelj_odjava} (#{korisnik})" action="#{noviPortfelj.odjava()}" />
+                            </p:submenu>
+                        </p:menu>
+                    </h:form>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center">
+                    <h:form>
+
+
+                        <h:outputLabel for="naziv" value="#{i18n.noviPortfelj_naziv}" style="font-weight:bold"/>                    
+                        <p:inputText id="naziv" value="#{noviPortfelj.naziv}" required="true" label="#{i18n.noviPortfelj_naziv}"/>        
+
+                        <h:selectManyListbox value="#{noviPortfelj.odabraneAdrese}" size="7">
+                            <f:selectItems value="#{noviPortfelj.listaAdresa}" var="lista"
+                                           itemLabel="#{lista.adresa}" itemValue="#{lista.adresa}" />
+                        </h:selectManyListbox>
+                        <p:commandButton value="#{i18n.noviPortfelj_kreiraj}" style="margin-right:10px" action="#{noviPortfelj.kreiraj()}"/>
+
+
+                    </h:form>
+
+                </p:layoutUnit>
+
+            </p:layout>
+
+        </h:body>
+
+    </f:view>
+</html>
+
+
+

@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html" locale="#{lokalizacija.vazecaLokalizacija}">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>#{i18n.registracija_naslov}</title>
+            </f:facet>
+        </h:head>
+
+        <h:body>
+
+            <p:layout fullPage="true">
+
+                <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
+                    <h1>#{i18n.registracija_naslov}</h1>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="south" size="100" closable="true" collapsible="true">
+                    <h5>#{i18n.registracija_podnozje}</h5>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="west" size="225">
+                    <p:menu>
+                        <p:submenu label="#{i18n.prijava_resursi}">
+                            
+                        </p:submenu>
+                        <p:submenu label="#{i18n.prijava_postavke}">
+                            <p:menuitem value="#{i18n.index_naslov}" outcome="odabirJezika" />
+                        </p:submenu>
+                    </p:menu>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center">
+                    <h:form>
+                        <p:panel header="#{i18n.registracija_obrazac}">
+                            
+                            <h:panelGrid id="grid" columns="2" cellpadding="5">
+                                <h:outputLabel for="korisnickoIme" value="#{i18n.registracija_korisnickoIme}" style="font-weight:bold"/>                    
+                                <p:inputText id="korisnickoIme" value="#{registracija.korisnickoIme}" required="true" label="#{i18n.registracija_korisnickoIme}"/>
+                                                                
+                                <h:outputLabel for="ime" value="#{i18n.registracija_ime}" style="font-weight:bold"/>                    
+                                <p:inputText id="ime" value="#{registracija.ime}" required="true" label="#{i18n.registracija_ime}"/>
+                                                                
+                                <h:outputLabel for="prezime" value="#{i18n.registracija_prezime}" style="font-weight:bold"/>                    
+                                <p:inputText id="prezime" value="#{registracija.prezime}" required="true" label="#{i18n.registracija_prezime}"/>
+                                
+                                <h:outputLabel for="lozinka" value="#{i18n.registracija_lozinka}" style="font-weight:bold"/>                    
+                                <p:inputText id="lozinka" type="password" value="#{registracija.lozinka}" required="true" label="#{i18n.registracija_lozinka}" />
+                                                                
+                                <h:outputLabel for="email" value="#{i18n.registracija_email}" style="font-weight:bold"/>                    
+                                <p:inputText id="email" value="#{registracija.email}" required="true" label="#{i18n.registracija_email}"/>
+                                
+                            </h:panelGrid>
+                            <p:commandButton value="#{i18n.registracija_registrirajSe}" update="grid" validateClient="true" style="margin-right:10px" action="#{registracija.registriraj()}"/>
+                        </p:panel>
+                        
+                    </h:form>
+
+                </p:layoutUnit>
+
+            </p:layout>
+
+        </h:body>
+
+    </f:view>
+</html>
+
+
+

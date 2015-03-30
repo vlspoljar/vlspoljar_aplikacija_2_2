@@ -1,0 +1,53 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html" locale="#{lokalizacija.vazecaLokalizacija}">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>#{i18n.index_naslov}</title>
+            </f:facet>
+        </h:head>
+
+        <h:body>
+
+            <p:layout fullPage="true">
+
+                <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
+                    <h1>#{i18n.index_naslov}</h1>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="south" size="100" closable="true" collapsible="true">
+                    <h5>#{i18n.index_podnozje}</h5>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="west" size="225">
+                    <p:menu>
+                        <p:submenu label="#{i18n.index_postavke}">
+                            <p:menuitem value="#{i18n.index_naslov}" outcome="odabirJezika" />
+                        </p:submenu>
+
+                    </p:menu>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center">
+                    <h:form>
+                        <h:selectOneRadio value="#{lokalizacija.odabraniJezik}">
+                            <f:selectItems value="#{lokalizacija.podrzaniJezici}" />
+                        </h:selectOneRadio>
+                        <h:commandButton value="#{i18n.index_odaberiJezik}" 
+                                         action="#{lokalizacija.odaberiJezik}"/>
+                    </h:form>
+                </p:layoutUnit>
+
+            </p:layout>
+
+        </h:body>
+
+    </f:view>
+</html>
+

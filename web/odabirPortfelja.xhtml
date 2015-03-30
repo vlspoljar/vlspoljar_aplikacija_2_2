@@ -1,0 +1,65 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html" locale="#{lokalizacija.vazecaLokalizacija}">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>#{i18n.odabirPortfelja_naslov}</title>
+            </f:facet>
+        </h:head>
+
+        <h:body>
+
+            <p:layout fullPage="true">
+
+                <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
+                    <h1>#{i18n.odabirPortfelja_naslov}</h1>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="south" size="100" closable="true" collapsible="true">
+                    <h5>#{i18n.odabirPortfelja_podnozje}</h5>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="west" size="225">
+                    <h:form>
+                    <p:menu>
+                        <p:submenu label="#{i18n.odabirPortfelja_resursi}">
+                            <p:menuitem value="#{i18n.odabirPortfelja_noviPortfelj}" outcome="noviPortfelj" />                     
+                        </p:submenu>
+                        <p:submenu label="#{i18n.odabirPortfelja_postavke}">
+                            <p:menuitem value="#{i18n.index_naslov}" outcome="odabirJezika" />
+                            <p:menuitem value="#{i18n.odabirPortfelja_odjava}(#{korisnik})" action="#{odabirPortfelja.odjava()}" />
+                        </p:submenu>
+                    </p:menu>
+                    </h:form>
+                </p:layoutUnit>
+                
+                <p:layoutUnit position="center">
+                    
+                    <h:form>
+
+                        <h:selectOneMenu value="#{odabirPortfelja.odabraniPortfelj}">
+                            <f:selectItems value="#{odabirPortfelja.listaPortfelja}" var="lista"
+                                           itemLabel="#{lista.naziv}" itemValue="#{lista.naziv}" />
+                        </h:selectOneMenu>
+                        <p:commandButton value="#{i18n.odabirPortfelja_odaberi}" style="margin-right:10px" action="#{odabirPortfelja.odaberiPortfelj()}"/>
+
+
+                    </h:form>
+                    
+                </p:layoutUnit>
+
+            </p:layout>
+
+        </h:body>
+
+    </f:view>
+</html>
+
+
+

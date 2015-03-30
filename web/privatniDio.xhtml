@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html" locale="#{lokalizacija.vazecaLokalizacija}">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>#{i18n.privatniDio_naslov}</title>
+            </f:facet>
+        </h:head>
+
+        <h:body>
+
+            <p:layout fullPage="true">
+
+                <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
+                    <h1>#{i18n.privatniDio_naslov}</h1>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="south" size="100" closable="true" collapsible="true">
+                    <h5>#{i18n.privatniDio_podnozje}</h5>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="west" size="225">
+                    <h:form>
+                        <p:menu>
+                            <p:submenu label="#{i18n.privatniDio_resursi}">
+                                <p:menuitem value="#{i18n.privatniDio_noviPortfelj}" outcome="noviPortfelj" />
+                                <p:menuitem value="#{i18n.privatniDio_odabirPortfelja}" outcome="odabirPortfelja" />
+                            </p:submenu>
+                            <p:submenu label="#{i18n.privatniDio_postavke}">
+                                <p:menuitem value="#{i18n.index_naslov}" outcome="odabirJezika" />
+                                <p:menuitem value="#{i18n.privatniDio_odjava} (#{korisnik})" action="#{pregledPrivatniDio.odjava()}" />
+                            </p:submenu>
+                        </p:menu>
+                    </h:form>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center">
+
+                    <h:form id="obrazac">
+
+                        <h:panelGrid columns="2">
+
+                            <h:panelGroup layout="block">
+                                <h:outputLabel value="#{i18n.privatniDio_posljednjihN}"/>
+                                <h:inputText id="posljednjihN" value="#{pregledPrivatniDio.posljednjihN}"/>
+                                <h:commandButton id="osvjeziN" value="#{i18n.privatniDio_prikazi}" action="#{pregledPrivatniDio.prikazi()}">
+                                    <f:ajax execute="posljednjihN" render="tablicaMeteo"/>
+                                </h:commandButton>
+                            </h:panelGroup>
+                            <br/>
+                            <h:panelGroup layout="block">
+                                <h:outputLabel value="#{i18n.privatniDio_interval}"/>
+                                <h:inputText id="Od" value="#{pregledPrivatniDio.od}"/>
+                                <h:inputText id="Do" value="#{pregledPrivatniDio.do}"/>
+                                <h:commandButton id="osvjeziI" value="#{i18n.privatniDio_prikazi}" action="#{pregledPrivatniDio.prikazi()}">
+                                    <f:ajax execute="Od Do" render="tablicaMeteo"/>
+                                </h:commandButton>
+                            </h:panelGroup>
+
+                        </h:panelGrid>
+                        
+                        <p:dataTable var="meteo" id="tablicaMeteo" value="#{pregledPrivatniDio.listaWD}" rows="5"
+                                     paginator="true"
+                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     rowsPerPageTemplate="5,10,20,50,100">
+                        
+                            <p:column headerText="#{i18n.privatniDio_adresa}">
+                                <h:outputText value="#{meteo.address}" style="display:inline-block"/>
+                            </p:column>
+                            <p:column headerText="#{i18n.privatniDio_temperatura}">
+                                <h:outputText value="#{meteo.temperature}" style="display:inline-block"/>
+                            </p:column>
+                            <p:column headerText="#{i18n.privatniDio_tlak}">
+                                <h:outputText value="#{meteo.pressureSeaLevel}" style="display:inline-block"/>
+                            </p:column>
+                            <p:column headerText="#{i18n.privatniDio_vlaznost}">
+                                <h:outputText value="#{meteo.humidity}" style="display:inline-block"/>
+                            </p:column>
+                            <p:column headerText="#{i18n.privatniDio_brzinaVjetra}">
+                                <h:outputText value="#{meteo.windSpeed}" style="display:inline-block"/>
+                            </p:column>
+                            <p:column headerText="#{i18n.privatniDio_kisa}">
+                                <h:outputText value="#{meteo.rainRate}" style="display:inline-block"/>
+                            </p:column>
+                            <p:column headerText="#{i18n.privatniDio_snijeg}">
+                                <h:outputText value="#{meteo.snowRate}" style="display:inline-block"/>
+                            </p:column>
+                            <p:column headerText="#{i18n.privatniDio_datum}">
+                                <h:outputText value="#{meteo.date}" style="display:inline-block"/>
+                            </p:column>
+                            
+                        </p:dataTable>
+
+                    </h:form>
+
+                </p:layoutUnit>
+
+            </p:layout>
+
+        </h:body>
+
+    </f:view>
+</html>
+
+
+

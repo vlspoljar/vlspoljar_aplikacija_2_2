@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html" locale="#{lokalizacija.vazecaLokalizacija}">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>#{i18n.adminDio_naslov}</title>
+            </f:facet>
+        </h:head>
+
+        <h:body>
+
+            <p:layout fullPage="true">
+
+                <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
+                    <h1>#{i18n.adminDio_naslov}</h1>
+                    
+                </p:layoutUnit>
+
+                <p:layoutUnit position="south" size="100" closable="true" collapsible="true">
+                    <h5>#{i18n.adminDio_podnozje}</h5>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="west" size="225">
+                    <h:form>
+                        <p:menu>
+                            <p:submenu label="#{i18n.adminDio_resursi}">
+                                <p:menuitem value="#{i18n.adminDio_prijava}" outcome="noviPortfelj" />
+                                <p:menuitem value="#{i18n.adminDio_registracija}" outcome="odabirPortfelja" />
+                            </p:submenu>
+                            <p:submenu label="#{i18n.adminDio_postavke}">
+                                <p:menuitem value="#{i18n.adminDio_odabirJezika}" outcome="odabirJezika" />
+                                <p:menuitem value="#{i18n.adminDio_odjava} (#{korisnik})" action="#{adminDio.odjava()}" />
+                            </p:submenu>
+                        </p:menu>
+                    </h:form>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center">
+                    <h:form>
+                        <h:selectOneListbox value="#{pregledAdminDio.odabranaMapa}">
+                            <f:selectItems value="#{pregledAdminDio.mape}" />
+                        </h:selectOneListbox>
+                        <h:commandButton value="#{i18n.adminDio_odaberiMapu}" action="#{pregledAdminDio.odaberiMapu()}" />
+                    </h:form>
+                    <p:dataTable var="poruka" id="tablicaPoruka" value="#{pregledAdminDio.poruke}" rows="5"
+                                 paginator="true"
+                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                 rowsPerPageTemplate="5,10,20,50,100">
+                        <p:column headerText="#{i18n.adminDio_od}">
+                            <h:outputText value="#{poruka.salje}" style="display:inline-block"/>
+                        </p:column>
+                        <p:column headerText="#{i18n.adminDio_predmet}">
+                            <h:outputText value="#{poruka.predmet}" style="display:inline-block"/>
+                        </p:column>
+                        <p:column headerText="#{i18n.adminDio_datum}">
+                            <h:outputText value="#{poruka.vrijeme}" style="display:inline-block"/>
+                        </p:column>
+                        <p:column headerText="#{i18n.adminDio_sadrzaj}">
+                            <h:outputText value="#{poruka.sadrzajPoruke}" style="display:inline-block"/>
+                        </p:column>
+
+                    </p:dataTable>
+
+                </p:layoutUnit>
+
+            </p:layout>
+
+        </h:body>
+
+    </f:view>
+</html>
+
+
+
